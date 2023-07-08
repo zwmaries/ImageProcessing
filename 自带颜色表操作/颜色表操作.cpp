@@ -3,7 +3,8 @@
 using namespace std;
 using namespace cv;
 
-Mat image = imread("D://BingDownload//lena.png");
+Mat image = imread("D://BingDownload//football.jpg");
+
 void color_style_demo()
 {
 	int colormap[] = {
@@ -68,9 +69,26 @@ void channels_demo()//通道分离与混合操作
 	mixChannels(&image, 1, &dst, 1, from_to, 3);
 	imshow("通道混合", dst);
 }
+
+void inrange_demo()
+{
+	Mat hsv;
+	cvtColor(image, hsv, COLOR_BGR2HSV);
+	Mat mask;
+	//h 0-180 s 0-255 v 0-255
+	inRange(hsv, Scalar(100,43,46), Scalar(124,255,255), mask);
+	imshow("输入图像", image);
+
+	Mat redback = Mat::zeros(image.size(), image.type());
+	redback = Scalar(40, 40, 200);
+	bitwise_not(mask, mask);
+	imshow("mask", mask);
+	image.copyTo(redback, mask);
+	imshow("roi区域提取",redback);
+}
 int main()
 {
-	channels_demo();
+	inrange_demo();
 	waitKey(0);
 	return 0;
 }
