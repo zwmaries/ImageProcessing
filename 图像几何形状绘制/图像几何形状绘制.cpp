@@ -24,11 +24,33 @@ void drawing_demo(Mat& image)
 	addWeighted(image, 0.7, bg, 0.3, 0, dst);
 	imshow("绘制演示", dst);
 }
+//多边形填充与绘制
+void polyline_drawing_demo()
+{
+	Mat canvas = Mat::zeros(Size(512, 512), CV_8UC3);
+	Point p1(100, 100);
+	Point p2(350, 100);
+	Point p3(450, 280);
+	Point p4(320, 450);
+	Point p5(80, 400);
+	vector<Point> pts;
+	pts.push_back(p1);
+	pts.push_back(p2);
+	pts.push_back(p3);
+	pts.push_back(p4);
+	pts.push_back(p5);
+	//polylines(canvas, pts, true, Scalar(0, 0, 255), 1, 8, 0);//绘制多边形（不可填充）
+	//fillPoly(canvas, pts, Scalar(255, 0, 255),8,0);//填充多边形
+	vector<vector<Point>> contours;
+	contours.push_back(pts);
+	drawContours(canvas, contours, -1, Scalar(255, 0, 0), -1);
+	imshow("多边形绘制", canvas);
+}
 
 int main()
 {
 	Mat image = imread("D://BingDownload//football.jpg");
-	drawing_demo(image);
+	polyline_drawing_demo();
 	waitKey(0);
 	return 0;
 }
