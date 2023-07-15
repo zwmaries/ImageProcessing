@@ -5,56 +5,61 @@
 using namespace cv;
 using namespace std;
 
+Point sp(-1, -1);//起始位置
+Point ep(-1, -1);//结束位置
+Mat temp;
 void onMouse(int event, int x, int y, int flags, void* param) //evnet:鼠标事件类型 x,y:鼠标坐标 flags：鼠标哪个键
 {
-	Mat* im = reinterpret_cast<Mat*>(param);
-	switch (event)
+	Mat image = *((Mat*)param);
+	if (event == EVENT_LBUTTONDOWN)
 	{
-	case EVENT_LBUTTONDOWN:
-		//显示图像像素值
-		if (static_cast<int>(im->channels())==1)
+		sp.x = x;
+		sp.y = y;
+		cout << "start point:" << sp << endl;
+	}
+	else if (event == EVENT_LBUTTONUP)
+	{
+		ep.x = x;
+		ep.y = y;
+		int dx = ep.x - sp.x;
+		int dy = ep.y - sp.y;
+		if (dx > 0 && dy > 0)
 		{
-			//若图像为单通道图像，则显示鼠标点击的坐标以及灰度值
-			switch (im->type())
+			Rect box(sp.x, sp.y, dx, dy);
+			rectangle(image, box, Scalar(0, 0, 255), 2, 8, 0);////截取感兴趣的区域
+			imshow("鼠标绘制", image);
+			imshow("ROI区域", image(box));//输出感兴趣的区域
+			//ready for next drawing
+			sp.x = -1;
+			sp.y = -1;
+		}
+	}
+	else if (event == EVENT_MOUSEMOVE)
+	{
+		if (sp.x > 0 && sp.y > 0)
+		{
+			ep.x = x;
+			ep.y = y;
+			int dx = ep.x - sp.x;
+			int dy = ep.y - sp.y;
+			if (dx > 0 && dy > 0)
 			{
-			case 0:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<uchar>(Point(x, y))) << endl; 
-				break;
-			case 1:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<char>(Point(x, y))) << endl; 
-				break;
-			case 2:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<ushort>(Point(x, y))) << endl; 
-				break;
-			case 3:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<short>(Point(x, y))) << endl; 
-				break;
-			case 4:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<int>(Point(x, y))) << endl; 
-				break;
-			case 5:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<float>(Point(x, y))) << endl; 
-				break;
-			case 6:
-				cout << "at (" << x << ", " << y << " ) value is: " << static_cast<int>(im->at<double>(Point(x, y))) << endl; 
-				break;
-
+				Rect box(sp.x, sp.y, dx, dy);
+				temp.copyTo(image);//将temp变量中图像的内容复制到image变量中,即刷新画布
+				rectangle(image, box, Scalar(0, 0, 255), 2, 8, 0);
+				imshow("鼠标绘制", image);
 			}
 		}
-		else
-		{
-			//若图像为彩色图像，则显示鼠标点击坐标以及对应的B, G, R值
-			cout << "at (" << x << ", " << y << ")"
-				<< "  B value is: " << static_cast<int>(im->at<Vec3b>(Point(x, y))[0])
-				<< "  G value is: " << static_cast<int>(im->at<Vec3b>(Point(x, y))[1])
-				<< "  R value is: " << static_cast<int>(im->at<Vec3b>(Point(x, y))[2])
-				<< endl;
-		}
-
-		break;
 	}
 }
 
+void mouse_drawing_demo(Mat& image)
+{
+	namedWindow("鼠标绘制", WINDOW_AUTOSIZE);
+	setMouseCallback("鼠标绘制", onMouse,(void*)(&image));
+	imshow("鼠标绘制", image);
+	temp = image.clone();
+}
 //setMouseCallback("image1", onMouse, reinterpret_cast<void*>(&image1)); //关联图像显示窗口和onMouse函数
 
 
