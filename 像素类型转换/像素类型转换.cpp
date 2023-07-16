@@ -3,11 +3,11 @@
 using namespace std;
 using namespace cv;
 
-void norm_demo(Mat& image)
+void norm_demo(Mat& image)//归一化
 {
 	Mat dst;
 	cout << image.type() << endl;
-	image.convertTo(image, CV_32F);
+	image.convertTo(image, CV_32F);//转换数据类型为CV_32F
 	cout << image.type() << endl;
 	normalize(image, dst, 1.0, 0, NORM_MINMAX);
 	cout << dst.type() << endl;
