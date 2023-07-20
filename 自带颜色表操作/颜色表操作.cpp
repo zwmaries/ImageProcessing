@@ -5,7 +5,7 @@ using namespace cv;
 
 Mat image = imread("D://BingDownload//football.jpg");
 
-void color_style_demo()
+void color_style_demo(Mat &image)
 {
 	int colormap[] = {
 	COLORMAP_AUTUMN,
