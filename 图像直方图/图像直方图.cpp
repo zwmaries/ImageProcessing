@@ -3,10 +3,22 @@
 
 using namespace cv;
 using namespace std;
+
+void histogram_eq_demo(Mat& image)
+{
+	Mat gray;
+	cvtColor(image, gray, COLOR_BGR2GRAY);
+	imshow("灰度图", gray);
+	Mat dst;
+	equalizeHist(gray, dst);//直方图均衡化
+	imshow("直方图均衡化", dst);
+}
+
 int main()
 {
 	Mat image, image_gray, hist;//定义输入图像，灰度图像，直方图
 	image = imread("D://BingDownload//lena.png");
+	//histogram_eq_demo(image);
 	if (image.empty())
 	{
 		cout << "读取错误" << endl;
