@@ -27,6 +27,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "像素类型转换", "像�
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "视频读取", "视频读取\视频读取.vcxproj", "{1ACA3AD9-32C8-465D-93F6-2140DF789210}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "图像模糊", "图像模糊\图像模糊.vcxproj", "{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -131,6 +133,14 @@ Global
 		{1ACA3AD9-32C8-465D-93F6-2140DF789210}.Release|x64.Build.0 = Release|x64
 		{1ACA3AD9-32C8-465D-93F6-2140DF789210}.Release|x86.ActiveCfg = Release|Win32
 		{1ACA3AD9-32C8-465D-93F6-2140DF789210}.Release|x86.Build.0 = Release|Win32
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Debug|x64.ActiveCfg = Debug|x64
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Debug|x64.Build.0 = Debug|x64
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Debug|x86.ActiveCfg = Debug|Win32
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Debug|x86.Build.0 = Debug|Win32
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Release|x64.ActiveCfg = Release|x64
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Release|x64.Build.0 = Release|x64
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Release|x86.ActiveCfg = Release|Win32
+		{4BD72BF5-1E72-4E3A-9118-F0D9731C7647}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

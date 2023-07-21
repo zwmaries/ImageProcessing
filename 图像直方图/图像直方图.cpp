@@ -4,7 +4,7 @@
 using namespace cv;
 using namespace std;
 
-void histogram_eq_demo(Mat& image)
+void histogram_eq_demo(Mat& image)//直方图均衡化
 {
 	Mat gray;
 	cvtColor(image, gray, COLOR_BGR2GRAY);
