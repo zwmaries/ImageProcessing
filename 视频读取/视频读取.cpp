@@ -5,10 +5,9 @@ using namespace cv;
 
 void video_demo(Mat& image)
 {
-	//VideoCapture capture(0);
+	VideoCapture capture(0);
 	//读取指定视频
-	VideoCapture capture("C:/Users/pc-/Desktop/WeChat_20230719100517.mp4");
-	
+	//VideoCapture capture("C:/Users/pc-/Desktop/WeChat_20230719100517.mp4");
 	int frame_width = capture.get(CAP_PROP_FRAME_WIDTH);//3
 	int frame_height = capture.get(CAP_PROP_FRAME_HEIGHT);//4
 	int count = capture.get(CAP_PROP_FRAME_COUNT);//5
